@@ -1,9 +1,9 @@
-import { useQuery } from "react-query";
+import { useQuery } from 'react-query';
 
-import { api } from "services/api";
+import { api } from 'services/api';
 
 export type Character = {
-  id: number;
+  char_id: number;
   name: string;
   birthday: string;
   occupation: Array<string>;
@@ -15,13 +15,49 @@ export type Character = {
   category: Array<string>;
 };
 
-const getCharacters = async () => {
-  const { data } = await api.get<Array<Character>>("/characters");
+interface GetCharacterByIdProps {
+  char_id: string;
+}
 
-  const charactersFormatted = data.map((item) => {
+export const getCharacterById = async ({ char_id }: GetCharacterByIdProps) => {
+  try {
+    const { data } = await api.get<Array<Character>>(`/characters/${char_id}`);
+
+    return { ...data[0], category: String(data[0].category).split(', ') };
+  } catch (err) {
+    return err;
+  }
+};
+
+export const getRandomCharacter = async () => {
+  try {
+    const { data } = await api.get<Array<Character>>('/character/random');
+
+    return { ...data[0], category: String(data[0].category).split(', ') };
+  } catch (err) {
+    return err;
+  }
+};
+
+const getCharacters = async ({
+  limit,
+  offset,
+  name,
+  category,
+}: UseCharactersProps) => {
+  const { data } = await api.get<Array<Character>>('/characters', {
+    params: {
+      limit,
+      offset,
+      name,
+      category,
+    },
+  });
+
+  const charactersFormatted = data.map(item => {
     return {
       ...item,
-      category: String(item.category).split(", "),
+      category: String(item.category).split(', '),
     };
   });
 
@@ -30,12 +66,22 @@ const getCharacters = async () => {
 
 interface UseCharactersProps {
   limit: string;
-  offset: string;
+  offset?: string;
   name?: string;
+  category?: string;
 }
 
-export function useCharacters({ limit, offset, name }: UseCharactersProps) {
-  return useQuery(["characters"], () => getCharacters(), {
-    staleTime: 1000 * 60 * 5, // 10 minutos
-  });
+export function useCharacters({
+  limit,
+  offset,
+  name,
+  category,
+}: UseCharactersProps) {
+  return useQuery(
+    ['characters', limit, offset, name, category],
+    () => getCharacters({ limit, offset, name, category }),
+    {
+      staleTime: 1000 * 60 * 5, // 10 minutos
+    },
+  );
 }

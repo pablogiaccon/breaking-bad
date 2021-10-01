@@ -1,39 +1,37 @@
-import { Stack } from "@chakra-ui/react";
+import { Stack } from '@chakra-ui/react';
+import { CgCross } from 'react-icons/cg';
 import {
   RiContactsLine,
-  RiDashboardLine,
-  RiGitMergeLine,
-  RiInputMethodLine,
-  RiHospitalLine,
-} from "react-icons/ri";
+  RiRefreshLine,
+  RiFileList2Line,
+  RiPencilLine,
+} from 'react-icons/ri';
 
-import { NavLink } from "./NavLink";
-import { NavSection } from "./NavSection";
+import { NavLink } from './NavLink';
+import { NavSection } from './NavSection';
 
 export function SidebarNav() {
   return (
     <Stack spacing="12" align="flex-start">
-      <NavSection title="GERAL">
-        <NavLink href="/dashboard" icon={RiDashboardLine}>
-          Dashboard
+      <NavSection title="GENERAL">
+        <NavLink href="/" icon={RiContactsLine}>
+          Characters
         </NavLink>
 
-        <NavLink href="/clinics" icon={RiHospitalLine}>
-          Clínicas
+        <NavLink href="/random-character" icon={RiRefreshLine}>
+          Random character
         </NavLink>
 
-        <NavLink href="/users" icon={RiContactsLine}>
-          Usuários
-        </NavLink>
-      </NavSection>
-
-      <NavSection title="AUTOMAÇÃO">
-        <NavLink href="/forms" icon={RiInputMethodLine}>
-          Formulários
+        <NavLink href="/episodes" icon={RiFileList2Line}>
+          Episodes
         </NavLink>
 
-        <NavLink href="/automation" icon={RiGitMergeLine}>
-          Automação
+        <NavLink href="/quote" icon={RiPencilLine}>
+          Quote
+        </NavLink>
+
+        <NavLink href="/deaths" icon={CgCross}>
+          Deaths
         </NavLink>
       </NavSection>
     </Stack>

@@ -1,13 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect, FormEvent, useCallback } from 'react';
 
-import { Flex, Input, Icon } from "@chakra-ui/react";
-import { RiSearchLine } from "react-icons/ri";
+import { Flex, Input, Icon } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { RiSearchLine } from 'react-icons/ri';
 
 export function SearchBox() {
-  const [search, setSearch] = useState("");
+  const { query, push } = useRouter();
+  const [search, setSearch] = useState('');
+
+  useEffect(() => {
+    if (query.search) {
+      setSearch(String(query.search));
+    }
+  }, [query]);
+
+  const handleSubmit = useCallback(
+    (e: FormEvent) => {
+      e.preventDefault();
+
+      if (search) {
+        push(`/?search=${search}`);
+      } else {
+        push('/');
+      }
+    },
+    [push, search],
+  );
   return (
     <Flex
-      as="label"
+      as="form"
       flex="1"
       py="4"
       px="8"
@@ -18,6 +39,7 @@ export function SearchBox() {
       position="relative"
       bg="gray.800"
       borderRadius="full"
+      onSubmit={handleSubmit}
     >
       <Input
         color="gray.50"
@@ -25,9 +47,9 @@ export function SearchBox() {
         px="4"
         mr="4"
         placeholder="Find for a character"
-        _placeholder={{ color: "gray.400" }}
+        _placeholder={{ color: 'gray.400' }}
         value={search}
-        onChange={(event) => setSearch(event.target.value)}
+        onChange={event => setSearch(event.target.value)}
       />
 
       <Icon as={RiSearchLine} fontSize="20" />
