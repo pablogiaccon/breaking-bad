@@ -73,7 +73,7 @@ export function CharacterInformation({ character }: CharacterInformationProps) {
           <Flex fontSize="md" align="center">
             Occupation:
             <Flex flexWrap="wrap" ml="2">
-              {occupation.map(item => (
+              {occupation?.map(item => (
                 <Text
                   key={item}
                   mb="2"
@@ -94,7 +94,7 @@ export function CharacterInformation({ character }: CharacterInformationProps) {
           <Flex fontSize="md" align="center">
             Category:
             <Flex flexWrap="wrap" ml="2">
-              {category.map(item => (
+              {category?.map(item => (
                 <Link
                   key={item}
                   href={`/?category=${item}`}
@@ -116,7 +116,7 @@ export function CharacterInformation({ character }: CharacterInformationProps) {
           <Flex fontSize="md" align="center">
             Appearance:
             <Flex flexWrap="wrap" ml="2">
-              {appearance.map(item => (
+              {appearance?.map(item => (
                 <Text
                   key={item}
                   mb="2"
