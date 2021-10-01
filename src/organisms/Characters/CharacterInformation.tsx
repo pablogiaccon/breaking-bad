@@ -75,6 +75,7 @@ export function CharacterInformation({ character }: CharacterInformationProps) {
             <Flex flexWrap="wrap" ml="2">
               {occupation.map(item => (
                 <Text
+                  key={item}
                   mb="2"
                   mr="2"
                   fontSize="lg"
@@ -95,6 +96,7 @@ export function CharacterInformation({ character }: CharacterInformationProps) {
             <Flex flexWrap="wrap" ml="2">
               {category.map(item => (
                 <Link
+                  key={item}
                   href={`/?category=${item}`}
                   mb="2"
                   mr="2"
@@ -116,6 +118,7 @@ export function CharacterInformation({ character }: CharacterInformationProps) {
             <Flex flexWrap="wrap" ml="2">
               {appearance.map(item => (
                 <Text
+                  key={item}
                   mb="2"
                   mr="2"
                   fontSize="lg"
