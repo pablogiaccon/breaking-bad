@@ -1,24 +1,19 @@
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 
 import { Character, getRandomCharacter } from 'hooks/useCharacters';
 import { CharacterInformation } from 'organisms/Characters/CharacterInformation';
-import { Layout } from 'organisms/Layout';
 
 interface CharacterProps {
   character: Character;
 }
 
 const RandomCharacterPage = ({ character }: CharacterProps) => {
-  return (
-    <Layout>
-      <CharacterInformation character={character} />
-    </Layout>
-  );
+  return <CharacterInformation character={character} />;
 };
 
 export default RandomCharacterPage;
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const character = await getRandomCharacter();
 
   return {

@@ -1,7 +1,5 @@
-import { Layout } from 'organisms/Layout';
-
 const DeathsPage = () => {
-  return <Layout>DeathsPage</Layout>;
+  return <h1>DeathsPage</h1>;
 };
 
 export default DeathsPage;

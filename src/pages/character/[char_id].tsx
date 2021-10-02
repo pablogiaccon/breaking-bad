@@ -2,18 +2,13 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 
 import { Character, getCharacterById } from 'hooks/useCharacters';
 import { CharacterInformation } from 'organisms/Characters/CharacterInformation';
-import { Layout } from 'organisms/Layout';
 
 interface CharacterProps {
   character: Character;
 }
 
 const CharacterPage = ({ character }: CharacterProps) => {
-  return (
-    <Layout>
-      <CharacterInformation character={character} />
-    </Layout>
-  );
+  return <CharacterInformation character={character} />;
 };
 
 export default CharacterPage;
@@ -41,5 +36,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       character,
     },
+    revalidate: 60 * 60 * 24, // 24hs
   };
 };
