@@ -1,7 +1,5 @@
-import { Layout } from 'organisms/Layout';
-
 const QuotePage = () => {
-  return <Layout>QuotePage</Layout>;
+  return <h1>QuotePage</h1>;
 };
 
 export default QuotePage;

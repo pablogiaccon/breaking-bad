@@ -1,8 +1,8 @@
-import { useMemo } from "react";
+import { useMemo } from 'react';
 
-import { Stack, Box, Text } from "@chakra-ui/react";
+import { Stack, Box, Text } from '@chakra-ui/react';
 
-import { PaginationItem } from "./PaginationItem";
+import { PaginationItem } from './PaginationItem';
 
 interface PaginationProps {
   totalCountOfRegisters: number;
@@ -18,7 +18,7 @@ function generatePagesArray(from: number, to: number) {
     .map((_, index) => {
       return from + index + 1;
     })
-    .filter((page) => page > 0);
+    .filter(page => page > 0);
 }
 
 export function Pagination({
@@ -28,7 +28,9 @@ export function Pagination({
   onPageChange,
 }: PaginationProps) {
   const lastPage = useMemo(() => {
-    return Math.floor(totalCountOfRegisters / registersPerPage);
+    if (totalCountOfRegisters % registersPerPage === 0)
+      return Math.floor(totalCountOfRegisters / registersPerPage);
+    return Math.floor(totalCountOfRegisters / registersPerPage) + 1;
   }, [registersPerPage, totalCountOfRegisters]);
 
   const previousPages = useMemo(() => {
@@ -41,7 +43,7 @@ export function Pagination({
     return currentPage < lastPage
       ? generatePagesArray(
           currentPage,
-          Math.min(currentPage + siblingsCount, lastPage)
+          Math.min(currentPage + siblingsCount, lastPage),
         )
       : [];
   }, [currentPage, lastPage]);
@@ -57,15 +59,15 @@ export function Pagination({
 
   return (
     <Stack
-      direction={["column", "row"]}
+      direction={['column', 'row']}
       spacing="6"
       mt="8"
       justify="space-between"
       align="center"
     >
       <Box>
-        <strong>{visualizationPagesStart}</strong> -{" "}
-        <strong>{visualizationPagesEnd}</strong> de{" "}
+        <strong>{visualizationPagesStart}</strong> -{' '}
+        <strong>{visualizationPagesEnd}</strong> de{' '}
         <strong>{totalCountOfRegisters}</strong>
       </Box>
       <Stack direction="row" spacing="2">
@@ -81,7 +83,7 @@ export function Pagination({
         )}
 
         {previousPages.length > 0 &&
-          previousPages.map((page) => {
+          previousPages.map(page => {
             return (
               <PaginationItem
                 onPageChange={onPageChange}
@@ -98,7 +100,7 @@ export function Pagination({
         />
 
         {nextPages.length > 0 &&
-          nextPages.map((page) => {
+          nextPages.map(page => {
             return (
               <PaginationItem
                 onPageChange={onPageChange}

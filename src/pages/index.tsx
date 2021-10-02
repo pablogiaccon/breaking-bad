@@ -1,13 +1,13 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 import { SimpleGrid, Flex } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 
+import { Pagination } from 'components/Pagination';
 import { useCharacters } from 'hooks/useCharacters';
 import { CharacterItem } from 'organisms/Characters/CharacterItem';
 import { CharacterItemSkeleton } from 'organisms/Characters/CharacterItemSkeleton';
 import { Filters } from 'organisms/Characters/Filters';
-import { Layout } from 'organisms/Layout';
 
 interface HomeProps {
   name: string;
@@ -16,36 +16,56 @@ interface HomeProps {
 
 const Home = ({ name, category }: HomeProps) => {
   const [limit, setLimit] = useState('10');
-  const { data, isLoading } = useCharacters({ limit, name, category });
+  const [offset, setOffset] = useState('0');
+  const [page, setPage] = useState(1);
+  const { data, isLoading } = useCharacters({ limit, name, category, offset });
 
   function handleSetCharactersPerPage(quantity: string) {
     setLimit(quantity);
   }
 
-  return (
-    <Layout>
-      <Flex direction="column" flex={1}>
-        <Filters handleSetCharactersPerPage={handleSetCharactersPerPage} />
+  const handleSetOffset = useCallback(
+    (selectedPage: number) => {
+      setPage(selectedPage);
+      const result = Number(limit) * (selectedPage - 1);
 
-        {isLoading ? (
-          <SimpleGrid flex="1" gap="4" minChildWidth="320px" align="flex-start">
-            <CharacterItemSkeleton />
-            <CharacterItemSkeleton />
-            <CharacterItemSkeleton />
-            <CharacterItemSkeleton />
-            <CharacterItemSkeleton />
-            <CharacterItemSkeleton />
-            <CharacterItemSkeleton />
-          </SimpleGrid>
-        ) : (
-          <SimpleGrid flex="1" gap="4" minChildWidth="320px" align="flex-start">
-            {data?.map(character => (
-              <CharacterItem key={character.char_id} character={character} />
-            ))}
-          </SimpleGrid>
-        )}
-      </Flex>
-    </Layout>
+      setOffset(String(result));
+    },
+    [limit],
+  );
+
+  return (
+    <Flex direction="column" flex={1}>
+      <Filters
+        handleSetCharactersPerPage={handleSetCharactersPerPage}
+        limit={limit}
+      />
+
+      {isLoading ? (
+        <SimpleGrid flex="1" gap="4" minChildWidth="320px" align="flex-start">
+          <CharacterItemSkeleton />
+          <CharacterItemSkeleton />
+          <CharacterItemSkeleton />
+          <CharacterItemSkeleton />
+          <CharacterItemSkeleton />
+          <CharacterItemSkeleton />
+          <CharacterItemSkeleton />
+        </SimpleGrid>
+      ) : (
+        <SimpleGrid flex="1" gap="4" minChildWidth="320px" align="flex-start">
+          {data?.map(character => (
+            <CharacterItem key={character.char_id} character={character} />
+          ))}
+        </SimpleGrid>
+      )}
+
+      <Pagination
+        onPageChange={handleSetOffset}
+        totalCountOfRegisters={62}
+        currentPage={page}
+        registersPerPage={Number(limit)}
+      />
+    </Flex>
   );
 };
 

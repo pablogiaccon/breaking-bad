@@ -2,9 +2,10 @@ import { Flex, Select } from '@chakra-ui/react';
 
 interface FiltersProps {
   handleSetCharactersPerPage(quantity: string): void;
+  limit: string;
 }
 
-export function Filters({ handleSetCharactersPerPage }: FiltersProps) {
+export function Filters({ handleSetCharactersPerPage, limit }: FiltersProps) {
   return (
     <Flex mb="4" justify="flex-end">
       <Select
@@ -17,6 +18,7 @@ export function Filters({ handleSetCharactersPerPage }: FiltersProps) {
         }}
         width="max-content"
         onChange={e => handleSetCharactersPerPage(e.target.value)}
+        value={limit}
       >
         <option
           value="10"
