@@ -11,6 +11,7 @@ export type Character = {
   status: string;
   nickname: string;
   appearance: Array<string>;
+  better_call_saul_appearance: Array<string>;
   portrayed: string;
   category: Array<string>;
 };

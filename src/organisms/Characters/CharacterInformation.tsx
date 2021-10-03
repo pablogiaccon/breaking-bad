@@ -40,6 +40,7 @@ export function CharacterInformation({
     birthday,
     appearance,
     portrayed,
+    better_call_saul_appearance,
   } = character;
 
   const getStatus: any = {
@@ -137,9 +138,31 @@ export function CharacterInformation({
           </Flex>
 
           <Flex fontSize="md" align="center">
-            Appearance:
+            Appearance in Breaking Bad:
             <Flex flexWrap="wrap" ml="2">
               {appearance?.map(item => (
+                <Text
+                  key={item}
+                  mb="2"
+                  mr="2"
+                  fontSize="lg"
+                  color="pink.200"
+                  bg="gray.400"
+                  px="2"
+                  py="1"
+                  borderRadius="8"
+                  width="max-content"
+                >
+                  {item}
+                </Text>
+              ))}
+            </Flex>
+          </Flex>
+
+          <Flex fontSize="md" align="center">
+            Appearance in Better Call Saul:
+            <Flex flexWrap="wrap" ml="2">
+              {better_call_saul_appearance?.map(item => (
                 <Text
                   key={item}
                   mb="2"
@@ -169,7 +192,7 @@ export function CharacterInformation({
             <Flex fontSize="md" align="center">
               <Icon as={CgCross} w="32px" h="32px" />
               <Text ml="2" fontSize="lg" fontWeight="bold">
-                {deaths_count}
+                {deaths_count || 0}
               </Text>
             </Flex>
           )}
