@@ -1,5 +1,7 @@
 import { Button, Flex, HStack, Text } from '@chakra-ui/react';
 
+import { ButtonSerieFilter } from './ButtonSerieFilter';
+
 interface SerieFilterProps {
   serie: string;
   onSerieChange: (serie: string) => void;
@@ -13,22 +15,17 @@ export function SerieFilter({ serie, onSerieChange }: SerieFilterProps) {
       </Text>
 
       <HStack spacing="2">
-        <Button
-          size="sm"
-          fontSize="xs"
-          colorScheme="pink"
-          onClick={() => onSerieChange('Breaking Bad')}
-        >
-          Breaking Bad
-        </Button>
-        <Button
-          size="sm"
-          fontSize="xs"
-          colorScheme="pink"
-          onClick={() => onSerieChange('Better Call Saul')}
-        >
-          Better Call Saul
-        </Button>
+        <ButtonSerieFilter
+          isCurrent={serie === 'Breaking Bad'}
+          serie="Breaking Bad"
+          onSerieChange={onSerieChange}
+        />
+
+        <ButtonSerieFilter
+          isCurrent={serie === 'Better Call Saul'}
+          serie="Better Call Saul"
+          onSerieChange={onSerieChange}
+        />
       </HStack>
     </Flex>
   );

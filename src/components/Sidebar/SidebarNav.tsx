@@ -18,10 +18,6 @@ export function SidebarNav() {
           Characters
         </NavLink>
 
-        <NavLink href="/random-character" icon={RiRefreshLine}>
-          Random character
-        </NavLink>
-
         <NavLink href="/episodes" icon={RiFileList2Line}>
           Episodes
         </NavLink>
@@ -32,6 +28,20 @@ export function SidebarNav() {
 
         <NavLink href="/deaths" icon={CgCross}>
           Deaths
+        </NavLink>
+      </NavSection>
+
+      <NavSection title="RANDOM">
+        <NavLink href="/random/character" icon={RiContactsLine}>
+          Random character
+        </NavLink>
+
+        <NavLink href="/random/quote" icon={RiPencilLine}>
+          Random Quote
+        </NavLink>
+
+        <NavLink href="/random/death" icon={CgCross}>
+          Random death
         </NavLink>
       </NavSection>
     </Stack>

@@ -27,14 +27,17 @@ export const getEpisodeById = async ({ episode_id }: GetEpisodeByIdProps) => {
 };
 
 const getEpisodes = async ({ series }: UseEpisodesProps) => {
-  const { data } = await api.get<Array<Episode>>('/episodes', {
-    params: {
-      series,
-      limit: '10',
-    },
-  });
+  try {
+    const { data } = await api.get<Array<Episode>>('/episodes', {
+      params: {
+        series,
+      },
+    });
 
-  return data;
+    return data;
+  } catch (err: any) {
+    return err;
+  }
 };
 
 interface UseEpisodesProps {

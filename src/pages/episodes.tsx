@@ -13,7 +13,8 @@ import {
 } from '@chakra-ui/react';
 import Link from 'next/link';
 
-import { useEpisodes } from 'hooks/useEpisodes';
+import { Title } from 'components/Title';
+import { Episode, useEpisodes } from 'hooks/useEpisodes';
 import { SeasonsFilter } from 'organisms/Episodes/SeasonsFilter';
 import { SerieFilter } from 'organisms/Episodes/SerieFilter';
 
@@ -24,22 +25,27 @@ const Episodes = () => {
   const { data } = useEpisodes({ series: serieSelected });
 
   const episodes = useMemo(() => {
-    return data?.filter(episode => Number(episode.season) === seasonSelected);
+    return data?.filter(
+      (episode: Episode) => Number(episode.season) === seasonSelected,
+    );
   }, [data, seasonSelected]);
 
   return (
     <Flex direction="column" flex={1}>
-      <HStack mb="6">
-        <SeasonsFilter
-          season={seasonSelected}
-          onSeasonChange={e => setSeasonSelected(e)}
-          series={serieSelected}
-        />
-        <SerieFilter
-          serie={serieSelected}
-          onSerieChange={e => setSerieSelected(e)}
-        />
-      </HStack>
+      <Flex mb="6" align="center" justify="space-between">
+        <Title>Episodes</Title>
+        <HStack>
+          <SeasonsFilter
+            season={seasonSelected}
+            onSeasonChange={e => setSeasonSelected(e)}
+            series={serieSelected}
+          />
+          <SerieFilter
+            serie={serieSelected}
+            onSerieChange={e => setSerieSelected(e)}
+          />
+        </HStack>
+      </Flex>
       <Table variant="simple" size="sm">
         <Thead>
           <Tr>
@@ -61,7 +67,7 @@ const Episodes = () => {
               season,
               series,
               title,
-            }) => (
+            }: Episode) => (
               <Tr key={episode_id}>
                 <Td isNumeric>{episode}</Td>
                 <Td>{title}</Td>

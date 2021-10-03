@@ -7,7 +7,7 @@ interface FiltersProps {
 
 export function Filters({ handleSetCharactersPerPage, limit }: FiltersProps) {
   return (
-    <Flex mb="4" justify="flex-end">
+    <Flex>
       <Select
         borderColor="gray.700"
         focusBorderColor="pink.500"

@@ -19,22 +19,24 @@ interface GetCharacterByIdProps {
   char_id: string;
 }
 
-export const getCharacterById = async ({ char_id }: GetCharacterByIdProps) => {
+export const getCharacterById = async ({
+  char_id,
+}: GetCharacterByIdProps): Promise<Character> => {
   try {
     const { data } = await api.get<Array<Character>>(`/characters/${char_id}`);
 
     return { ...data[0], category: String(data[0].category).split(', ') };
-  } catch (err) {
+  } catch (err: any) {
     return err;
   }
 };
 
-export const getRandomCharacter = async () => {
+export const getRandomCharacter = async (): Promise<Character> => {
   try {
     const { data } = await api.get<Array<Character>>('/character/random');
 
     return { ...data[0], category: String(data[0].category).split(', ') };
-  } catch (err) {
+  } catch (err: any) {
     return err;
   }
 };
@@ -45,23 +47,27 @@ const getCharacters = async ({
   name,
   category,
 }: UseCharactersProps) => {
-  const { data } = await api.get<Array<Character>>('/characters', {
-    params: {
-      limit,
-      offset,
-      name,
-      category,
-    },
-  });
+  try {
+    const { data } = await api.get<Array<Character>>('/characters', {
+      params: {
+        limit,
+        offset,
+        name,
+        category,
+      },
+    });
 
-  const charactersFormatted = data.map(item => {
-    return {
-      ...item,
-      category: String(item.category).split(', '),
-    };
-  });
+    const charactersFormatted = data.map(item => {
+      return {
+        ...item,
+        category: String(item.category).split(', '),
+      };
+    });
 
-  return charactersFormatted;
+    return charactersFormatted;
+  } catch (err: any) {
+    return err;
+  }
 };
 
 interface UseCharactersProps {

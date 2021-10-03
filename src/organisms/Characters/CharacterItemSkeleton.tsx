@@ -1,6 +1,4 @@
-import { Flex, Image, Link, Text, Tag, Skeleton } from '@chakra-ui/react';
-
-import { Character } from 'hooks/useCharacters';
+import { Flex, Image, Text, Skeleton } from '@chakra-ui/react';
 
 export function CharacterItemSkeleton() {
   return (

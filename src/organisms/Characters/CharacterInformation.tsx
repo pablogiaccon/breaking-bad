@@ -1,12 +1,34 @@
-import { Flex, Tag, Button, Image, Text, Link } from '@chakra-ui/react';
+import {
+  Flex,
+  Tag,
+  Button,
+  Image,
+  Text,
+  Link,
+  SimpleGrid,
+  Icon,
+} from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import { CgCross } from 'react-icons/cg';
 
 import { Character } from 'hooks/useCharacters';
+import { Death } from 'hooks/useDeaths';
+import { Quote } from 'hooks/useQuotes';
+import { DeathItem } from 'organisms/Deaths/DeathItem';
+import { QuoteItem } from 'organisms/Quotes/QuoteItem';
 
 interface CharacterInformationProps {
   character: Character;
+  quotes: Array<Quote>;
+  death_information: Death;
+  deaths_count: number;
 }
-export function CharacterInformation({ character }: CharacterInformationProps) {
+export function CharacterInformation({
+  character,
+  quotes,
+  death_information,
+  deaths_count,
+}: CharacterInformationProps) {
   const { back } = useRouter();
   const {
     name,
@@ -24,6 +46,7 @@ export function CharacterInformation({ character }: CharacterInformationProps) {
     Alive: 'green',
     Deceased: 'red',
   };
+
   return (
     <Flex direction="column" flex="1">
       <Flex
@@ -141,11 +164,45 @@ export function CharacterInformation({ character }: CharacterInformationProps) {
               {portrayed}
             </Text>
           </Flex>
+
+          {category.some(item => item === 'Breaking Bad') && (
+            <Flex fontSize="md" align="center">
+              <Icon as={CgCross} w="32px" h="32px" />
+              <Text ml="2" fontSize="lg" fontWeight="bold">
+                {deaths_count}
+              </Text>
+            </Flex>
+          )}
         </Flex>
       </Flex>
+
       <Button w="max-content" colorScheme="pink" mt="4" onClick={back}>
         Back
       </Button>
+
+      {category.some(item => item === 'Breaking Bad') && death_information && (
+        <Flex direction="column" mt="6">
+          <Text fontSize="2xl" fontWeight="bold" mb="4">
+            Death Information
+          </Text>
+
+          <DeathItem death={death_information} />
+        </Flex>
+      )}
+
+      {!!quotes?.length && (
+        <Flex direction="column" mt="6">
+          <Text fontSize="2xl" fontWeight="bold" mb="4">
+            Character Quotes
+          </Text>
+
+          <SimpleGrid gap="4" minChildWidth="320px" width="100%">
+            {quotes?.map(quote => (
+              <QuoteItem key={quote.quote_id} quote={quote} />
+            ))}
+          </SimpleGrid>
+        </Flex>
+      )}
     </Flex>
   );
 }

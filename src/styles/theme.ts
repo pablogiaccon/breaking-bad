@@ -36,3 +36,18 @@ export const theme = extendTheme({
     }),
   },
 });
+
+// ::-webkit-scrollbar-track {
+//   background-color: #f4f4f4;
+// }
+
+// scrollbar-track-color: #f4f4f4;
+// ::-webkit-scrollbar {
+//   width: 6px;
+//   background: #f4f4f4;
+// }
+// ::-webkit-scrollbar-thumb {
+//   background: var(--gray_200);
+// }
+
+// scrollbar-base-color: var(--gray_200);
