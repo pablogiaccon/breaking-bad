@@ -11,7 +11,7 @@ export type Character = {
   status: string;
   nickname: string;
   appearance: Array<string>;
-  better_call_saul_appearance: Array<string>;
+  better_call_saul_appearance: Array<string> | null;
   portrayed: string;
   category: Array<string>;
 };
@@ -36,7 +36,13 @@ export const getRandomCharacter = async (): Promise<Character> => {
   try {
     const { data } = await api.get<Array<Character>>('/character/random');
 
-    return { ...data[0], category: String(data[0].category).split(', ') };
+    return {
+      ...data[0],
+      category: String(data[0].category).split(', '),
+      better_call_saul_appearance: data[0].better_call_saul_appearance
+        ? String(data[0].better_call_saul_appearance).split(',')
+        : null,
+    };
   } catch (err: any) {
     return err;
   }

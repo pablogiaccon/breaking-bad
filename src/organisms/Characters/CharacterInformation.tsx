@@ -7,6 +7,8 @@ import {
   Link,
   SimpleGrid,
   Icon,
+  Tooltip,
+  Box,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { CgCross } from 'react-icons/cg';
@@ -52,6 +54,7 @@ export function CharacterInformation({
     <Flex direction="column" flex="1">
       <Flex
         align="center"
+        direction={['column', 'column', 'row']}
         borderRadius="8"
         p={['4', '6']}
         bgGradient="linear(to-tl, gray.800, gray.700, pink.500)"
@@ -72,7 +75,12 @@ export function CharacterInformation({
         </Tag>
         <Image src={img} objectFit="fill" height="20rem" alt={name} />
 
-        <Flex ml="4" direction="column" w="100%">
+        <Flex
+          ml={['0', '0', '4']}
+          mt={['4', '4', '0']}
+          direction="column"
+          w="100%"
+        >
           <Flex fontSize="md" align="center">
             Name:
             <Text ml="2" fontSize="lg" fontWeight="bold">
@@ -102,7 +110,7 @@ export function CharacterInformation({
                   key={item}
                   mb="2"
                   mr="2"
-                  fontSize="lg"
+                  fontSize="sm"
                   color="gray.800"
                   bg="gray.400"
                   p="1"
@@ -124,7 +132,7 @@ export function CharacterInformation({
                   href={`/?category=${item}`}
                   mb="2"
                   mr="2"
-                  fontSize="lg"
+                  fontSize="sm"
                   color="pink.200"
                   bg="gray.400"
                   p="1"
@@ -145,7 +153,7 @@ export function CharacterInformation({
                   key={item}
                   mb="2"
                   mr="2"
-                  fontSize="lg"
+                  fontSize="sm"
                   color="pink.200"
                   bg="gray.400"
                   px="2"
@@ -159,27 +167,29 @@ export function CharacterInformation({
             </Flex>
           </Flex>
 
-          <Flex fontSize="md" align="center">
-            Appearance in Better Call Saul:
-            <Flex flexWrap="wrap" ml="2">
-              {better_call_saul_appearance?.map(item => (
-                <Text
-                  key={item}
-                  mb="2"
-                  mr="2"
-                  fontSize="lg"
-                  color="pink.200"
-                  bg="gray.400"
-                  px="2"
-                  py="1"
-                  borderRadius="8"
-                  width="max-content"
-                >
-                  {item}
-                </Text>
-              ))}
+          {better_call_saul_appearance && (
+            <Flex fontSize="md" align="center">
+              Appearance in Better Call Saul:
+              <Flex flexWrap="wrap" ml="2">
+                {better_call_saul_appearance?.map(item => (
+                  <Text
+                    key={item}
+                    mb="2"
+                    mr="2"
+                    fontSize="sm"
+                    color="pink.200"
+                    bg="gray.400"
+                    px="2"
+                    py="1"
+                    borderRadius="8"
+                    width="max-content"
+                  >
+                    {item}
+                  </Text>
+                ))}
+              </Flex>
             </Flex>
-          </Flex>
+          )}
 
           <Flex fontSize="md" align="center">
             Portrayed:
@@ -189,12 +199,23 @@ export function CharacterInformation({
           </Flex>
 
           {category.some(item => item === 'Breaking Bad') && (
-            <Flex fontSize="md" align="center">
-              <Icon as={CgCross} w="32px" h="32px" />
-              <Text ml="2" fontSize="lg" fontWeight="bold">
-                {deaths_count || 0}
-              </Text>
-            </Flex>
+            <Tooltip
+              label="Deaths count"
+              aria-label="A tooltip"
+              hasArrow
+              bg="pink.500"
+              placement="bottom"
+            >
+              <Flex fontSize="md" align="center" width="max-content">
+                <Box as="span">
+                  <Icon as={CgCross} w="32px" h="32px" />
+                </Box>
+
+                <Text ml="2" fontSize="lg" fontWeight="bold">
+                  {deaths_count || 0}
+                </Text>
+              </Flex>
+            </Tooltip>
           )}
         </Flex>
       </Flex>
