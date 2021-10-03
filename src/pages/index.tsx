@@ -4,7 +4,8 @@ import { SimpleGrid, Flex } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 
 import { Pagination } from 'components/Pagination';
-import { useCharacters } from 'hooks/useCharacters';
+import { Title } from 'components/Title';
+import { Character, useCharacters } from 'hooks/useCharacters';
 import { CharacterItem } from 'organisms/Characters/CharacterItem';
 import { CharacterItemSkeleton } from 'organisms/Characters/CharacterItemSkeleton';
 import { Filters } from 'organisms/Characters/Filters';
@@ -36,10 +37,13 @@ const Home = ({ name, category }: HomeProps) => {
 
   return (
     <Flex direction="column" flex={1}>
-      <Filters
-        handleSetCharactersPerPage={handleSetCharactersPerPage}
-        limit={limit}
-      />
+      <Flex align="center" justify="space-between" mb="6">
+        <Title>Characters</Title>
+        <Filters
+          handleSetCharactersPerPage={handleSetCharactersPerPage}
+          limit={limit}
+        />
+      </Flex>
 
       {isLoading ? (
         <SimpleGrid flex="1" gap="4" minChildWidth="320px" align="flex-start">
@@ -53,7 +57,7 @@ const Home = ({ name, category }: HomeProps) => {
         </SimpleGrid>
       ) : (
         <SimpleGrid flex="1" gap="4" minChildWidth="320px" align="flex-start">
-          {data?.map(character => (
+          {data?.map((character: Character) => (
             <CharacterItem key={character.char_id} character={character} />
           ))}
         </SimpleGrid>
