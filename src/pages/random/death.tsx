@@ -1,5 +1,6 @@
 import { Flex } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
+import Head from 'next/head';
 
 import { Title } from 'components/Title';
 import { Death, getRandomDeath } from 'hooks/useDeaths';
@@ -13,13 +14,18 @@ interface DeathProps {
 
 const RandomDeathPage = ({ death }: DeathProps) => {
   return (
-    <Flex direction="column" flex={1}>
-      <Flex align="center" justify="space-between" mb="6">
-        <Title>Random death</Title>
-      </Flex>
+    <>
+      <Head>
+        <title>Random Death - Breaking Bad</title>
+      </Head>
+      <Flex direction="column" flex={1}>
+        <Flex align="center" justify="space-between" mb="6">
+          <Title>Random death</Title>
+        </Flex>
 
-      <DeathItem death={death} />
-    </Flex>
+        <DeathItem death={death} />
+      </Flex>
+    </>
   );
 };
 

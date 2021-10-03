@@ -11,6 +11,7 @@ import {
   Flex,
   HStack,
 } from '@chakra-ui/react';
+import Head from 'next/head';
 import Link from 'next/link';
 
 import { Title } from 'components/Title';
@@ -31,68 +32,73 @@ const Episodes = () => {
   }, [data, seasonSelected]);
 
   return (
-    <Flex direction="column" flex={1}>
-      <Flex mb="6" align="center" justify="space-between">
-        <Title>Episodes</Title>
-        <HStack>
-          <SeasonsFilter
-            season={seasonSelected}
-            onSeasonChange={e => setSeasonSelected(e)}
-            series={serieSelected}
-          />
-          <SerieFilter
-            serie={serieSelected}
-            onSerieChange={e => setSerieSelected(e)}
-          />
-        </HStack>
+    <>
+      <Head>
+        <title>Episodes - Breaking Bad</title>
+      </Head>
+      <Flex direction="column" flex={1}>
+        <Flex mb="6" align="center" justify="space-between">
+          <Title>Episodes</Title>
+          <HStack>
+            <SeasonsFilter
+              season={seasonSelected}
+              onSeasonChange={e => setSeasonSelected(e)}
+              series={serieSelected}
+            />
+            <SerieFilter
+              serie={serieSelected}
+              onSerieChange={e => setSerieSelected(e)}
+            />
+          </HStack>
+        </Flex>
+        <Table variant="simple" size="sm">
+          <Thead>
+            <Tr>
+              <Th isNumeric>Episode</Th>
+              <Th>Title</Th>
+              <Th isNumeric>Season</Th>
+              <Th>Air date</Th>
+              <Th>Series</Th>
+              <Th>Characters</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {episodes?.map(
+              ({
+                episode_id,
+                air_date,
+                characters,
+                episode,
+                season,
+                series,
+                title,
+              }: Episode) => (
+                <Tr key={episode_id}>
+                  <Td isNumeric>{episode}</Td>
+                  <Td>{title}</Td>
+                  <Td isNumeric>{season}</Td>
+                  <Td>{air_date}</Td>
+                  <Td>{series}</Td>
+                  <Td maxW="320px">
+                    {characters.map(character => (
+                      <Link
+                        key={character}
+                        href={`/?search=${character}`}
+                        passHref
+                      >
+                        <ChakraLink mx="2" my="1">
+                          {character}
+                        </ChakraLink>
+                      </Link>
+                    ))}
+                  </Td>
+                </Tr>
+              ),
+            )}
+          </Tbody>
+        </Table>
       </Flex>
-      <Table variant="simple" size="sm">
-        <Thead>
-          <Tr>
-            <Th isNumeric>Episode</Th>
-            <Th>Title</Th>
-            <Th isNumeric>Season</Th>
-            <Th>Air date</Th>
-            <Th>Series</Th>
-            <Th>Characters</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {episodes?.map(
-            ({
-              episode_id,
-              air_date,
-              characters,
-              episode,
-              season,
-              series,
-              title,
-            }: Episode) => (
-              <Tr key={episode_id}>
-                <Td isNumeric>{episode}</Td>
-                <Td>{title}</Td>
-                <Td isNumeric>{season}</Td>
-                <Td>{air_date}</Td>
-                <Td>{series}</Td>
-                <Td maxW="320px">
-                  {characters.map(character => (
-                    <Link
-                      key={character}
-                      href={`/?search=${character}`}
-                      passHref
-                    >
-                      <ChakraLink mx="2" my="1">
-                        {character}
-                      </ChakraLink>
-                    </Link>
-                  ))}
-                </Td>
-              </Tr>
-            ),
-          )}
-        </Tbody>
-      </Table>
-    </Flex>
+    </>
   );
 };
 

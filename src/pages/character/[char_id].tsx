@@ -1,5 +1,6 @@
 import { Flex } from '@chakra-ui/react';
 import { GetStaticProps, GetStaticPaths } from 'next';
+import Head from 'next/head';
 
 import { Title } from 'components/Title';
 import { Character, getCharacterById } from 'hooks/useCharacters';
@@ -21,17 +22,22 @@ const CharacterPage = ({
   deaths_count,
 }: CharacterProps) => {
   return (
-    <Flex direction="column" flex={1}>
-      <Flex align="center" justify="space-between" mb="6">
-        <Title>Character information</Title>
+    <>
+      <Head>
+        <title>{character.name} - Breaking Bad</title>
+      </Head>
+      <Flex direction="column" flex={1}>
+        <Flex align="center" justify="space-between" mb="6">
+          <Title>Character information</Title>
+        </Flex>
+        <CharacterInformation
+          character={character}
+          quotes={quotes}
+          death_information={death_information}
+          deaths_count={deaths_count}
+        />
       </Flex>
-      <CharacterInformation
-        character={character}
-        quotes={quotes}
-        death_information={death_information}
-        deaths_count={deaths_count}
-      />
-    </Flex>
+    </>
   );
 };
 

@@ -22,7 +22,7 @@ export function SidebarNav() {
           Episodes
         </NavLink>
 
-        <NavLink href="/quote" icon={RiPencilLine}>
+        <NavLink href="/quotes" icon={RiPencilLine}>
           Quote
         </NavLink>
 

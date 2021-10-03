@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 
 import { SimpleGrid, Flex } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
+import Head from 'next/head';
 
 import { Pagination } from 'components/Pagination';
 import { Title } from 'components/Title';
@@ -36,40 +37,45 @@ const Home = ({ name, category }: HomeProps) => {
   );
 
   return (
-    <Flex direction="column" flex={1}>
-      <Flex align="center" justify="space-between" mb="6">
-        <Title>Characters</Title>
-        <Filters
-          handleSetCharactersPerPage={handleSetCharactersPerPage}
-          limit={limit}
+    <>
+      <Head>
+        <title>Characters - Breaking Bad</title>
+      </Head>
+      <Flex direction="column" flex={1}>
+        <Flex align="center" justify="space-between" mb="6">
+          <Title>Characters</Title>
+          <Filters
+            handleSetCharactersPerPage={handleSetCharactersPerPage}
+            limit={limit}
+          />
+        </Flex>
+
+        {isLoading ? (
+          <SimpleGrid flex="1" gap="4" minChildWidth="320px" align="flex-start">
+            <CharacterItemSkeleton />
+            <CharacterItemSkeleton />
+            <CharacterItemSkeleton />
+            <CharacterItemSkeleton />
+            <CharacterItemSkeleton />
+            <CharacterItemSkeleton />
+            <CharacterItemSkeleton />
+          </SimpleGrid>
+        ) : (
+          <SimpleGrid flex="1" gap="4" minChildWidth="320px" align="flex-start">
+            {data?.map((character: Character) => (
+              <CharacterItem key={character.char_id} character={character} />
+            ))}
+          </SimpleGrid>
+        )}
+
+        <Pagination
+          onPageChange={handleSetOffset}
+          totalCountOfRegisters={62}
+          currentPage={page}
+          registersPerPage={Number(limit)}
         />
       </Flex>
-
-      {isLoading ? (
-        <SimpleGrid flex="1" gap="4" minChildWidth="320px" align="flex-start">
-          <CharacterItemSkeleton />
-          <CharacterItemSkeleton />
-          <CharacterItemSkeleton />
-          <CharacterItemSkeleton />
-          <CharacterItemSkeleton />
-          <CharacterItemSkeleton />
-          <CharacterItemSkeleton />
-        </SimpleGrid>
-      ) : (
-        <SimpleGrid flex="1" gap="4" minChildWidth="320px" align="flex-start">
-          {data?.map((character: Character) => (
-            <CharacterItem key={character.char_id} character={character} />
-          ))}
-        </SimpleGrid>
-      )}
-
-      <Pagination
-        onPageChange={handleSetOffset}
-        totalCountOfRegisters={62}
-        currentPage={page}
-        registersPerPage={Number(limit)}
-      />
-    </Flex>
+    </>
   );
 };
 
