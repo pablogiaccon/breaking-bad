@@ -43,6 +43,7 @@ const CharacterPage = ({
 
 export default CharacterPage;
 
+/* istanbul ignore next */
 export const getStaticPaths: GetStaticPaths = () => {
   return {
     paths: [
@@ -57,6 +58,7 @@ export const getStaticPaths: GetStaticPaths = () => {
   };
 };
 
+/* istanbul ignore next */
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const character = await getCharacterById({
     char_id: String(params?.char_id),

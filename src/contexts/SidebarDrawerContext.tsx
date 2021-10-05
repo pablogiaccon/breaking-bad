@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext, useEffect } from 'react';
 
 import { useDisclosure, UseDisclosureReturn } from '@chakra-ui/react';
-import { useRouter } from 'next/dist/client/router';
+import { useRouter } from 'next/router';
 
 interface SidebarDrawerProviderProps {
   children: ReactNode;
@@ -15,17 +15,23 @@ export function SidebarDrawerProvider({
   children,
 }: SidebarDrawerProviderProps) {
   const disclosure = useDisclosure();
-  const router = useRouter();
+  const { asPath } = useRouter();
 
   useEffect(() => {
+    /* istanbul ignore next */
     disclosure.onClose();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.asPath]);
+  }, [asPath]);
+
+  /* istanbul ignore next */
   return (
-    <SidebarDrawerContext.Provider value={disclosure}>
+    <SidebarDrawerContext.Provider
+      value={disclosure}
+      data-testid="sidebar-context"
+    >
       {children}
     </SidebarDrawerContext.Provider>
   );
 }
-
+/* istanbul ignore next */
 export const useSidebarDrawer = () => useContext(SidebarDrawerContext);

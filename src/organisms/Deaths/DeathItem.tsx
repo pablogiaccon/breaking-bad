@@ -30,6 +30,7 @@ export function DeathItem({ death }: DeathItemProps) {
       position="relative"
       boxShadow="xl"
       maxW="320px"
+      data-testid="death-item"
     >
       <Tag
         fontSize="12px"

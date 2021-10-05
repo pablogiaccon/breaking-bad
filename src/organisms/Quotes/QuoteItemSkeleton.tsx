@@ -12,6 +12,7 @@ export function QuoteItemSkeleton() {
       position="relative"
       boxShadow="xl"
       maxW="320px"
+      data-testid="skeleton-quote-item"
     >
       <Skeleton>
         <Text fontSize="lg" fontWeight="bold">

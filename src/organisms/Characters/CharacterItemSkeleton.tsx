@@ -12,6 +12,7 @@ export function CharacterItemSkeleton() {
       position="relative"
       boxShadow="xl"
       maxW="320px"
+      data-testid="skeleton-character-item"
     >
       <Skeleton startColor="gray.800" endColor="gray.400" speed={2}>
         <Image src="/" objectFit="fill" height="20rem" width="240px" alt="" />

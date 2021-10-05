@@ -43,6 +43,7 @@ const RandomCharacterPage = ({
 
 export default RandomCharacterPage;
 
+/* istanbul ignore next */
 export const getServerSideProps: GetServerSideProps = async () => {
   const character = await getRandomCharacter();
   const quotes = await getQuotesByAuthor({ author: character.name });

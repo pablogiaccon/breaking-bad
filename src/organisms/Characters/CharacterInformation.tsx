@@ -51,7 +51,7 @@ export function CharacterInformation({
   };
 
   return (
-    <Flex direction="column" flex="1">
+    <Flex direction="column" flex="1" data-testid="character-information">
       <Flex
         align="center"
         direction={['column', 'column', 'row']}

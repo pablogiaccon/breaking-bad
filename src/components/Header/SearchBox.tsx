@@ -40,13 +40,14 @@ export function SearchBox() {
       bg="gray.800"
       borderRadius="full"
       onSubmit={handleSubmit}
+      data-testid="search-form"
     >
       <Input
         color="gray.50"
         variant="unstyled"
         px="4"
         mr="4"
-        placeholder="Find for a character"
+        placeholder="Search for a character"
         _placeholder={{ color: 'gray.400' }}
         value={search}
         onChange={event => setSearch(event.target.value)}

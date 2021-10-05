@@ -1,11 +1,6 @@
 import { Stack } from '@chakra-ui/react';
 import { CgCross } from 'react-icons/cg';
-import {
-  RiContactsLine,
-  RiRefreshLine,
-  RiFileList2Line,
-  RiPencilLine,
-} from 'react-icons/ri';
+import { RiContactsLine, RiFileList2Line, RiPencilLine } from 'react-icons/ri';
 
 import { NavLink } from './NavLink';
 import { NavSection } from './NavSection';

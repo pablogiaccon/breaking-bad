@@ -29,6 +29,7 @@ const RandomQuotePage = ({ quote }: QuoteProps) => {
 
 export default RandomQuotePage;
 
+/* istanbul ignore next */
 export const getServerSideProps: GetServerSideProps = async () => {
   const quote = await getRandomQuote();
 

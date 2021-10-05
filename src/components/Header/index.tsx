@@ -1,10 +1,10 @@
-import { Flex, Icon, IconButton, useBreakpointValue } from "@chakra-ui/react";
-import { RiMenuLine } from "react-icons/ri";
+import { Flex, Icon, IconButton, useBreakpointValue } from '@chakra-ui/react';
+import { RiMenuLine } from 'react-icons/ri';
 
-import { useSidebarDrawer } from "contexts";
+import { useSidebarDrawer } from 'contexts';
 
-import { Logo } from "./Logo";
-import { SearchBox } from "./SearchBox";
+import { Logo } from './Logo';
+import { SearchBox } from './SearchBox';
 
 export function Header() {
   const { onOpen } = useSidebarDrawer();
@@ -24,6 +24,7 @@ export function Header() {
       px="6"
       align="center"
       justifyContent="space-between"
+      data-testid="header"
     >
       {!isWideVersion && (
         <IconButton
@@ -33,6 +34,7 @@ export function Header() {
           onClick={onOpen}
           aria-label="Open navigation"
           mr="2"
+          data-testid="icon-drop-menu"
         />
       )}
       <Logo />

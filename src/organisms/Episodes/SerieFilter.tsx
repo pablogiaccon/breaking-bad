@@ -1,4 +1,4 @@
-import { Button, Flex, HStack, Text } from '@chakra-ui/react';
+import { Flex, HStack, Text } from '@chakra-ui/react';
 
 import { ButtonSerieFilter } from './ButtonSerieFilter';
 
@@ -9,7 +9,7 @@ interface SerieFilterProps {
 
 export function SerieFilter({ serie, onSerieChange }: SerieFilterProps) {
   return (
-    <Flex align="center" ml="auto">
+    <Flex align="center" ml="auto" data-testid="serie-filter">
       <Text mr="2" color="gray.400">
         Serie:
       </Text>

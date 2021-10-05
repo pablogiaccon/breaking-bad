@@ -36,18 +36,22 @@ const Episodes = () => {
       <Head>
         <title>Episodes - Breaking Bad</title>
       </Head>
-      <Flex direction="column" flex={1}>
+      <Flex direction="column" flex={1} data-testid="episodes-page">
         <Flex mb="6" align="center" justify="space-between">
           <Title>Episodes</Title>
           <HStack>
             <SeasonsFilter
               season={seasonSelected}
-              onSeasonChange={e => setSeasonSelected(e)}
+              onSeasonChange={
+                /* istanbul ignore next */ e => setSeasonSelected(e)
+              }
               series={serieSelected}
             />
             <SerieFilter
               serie={serieSelected}
-              onSerieChange={e => setSerieSelected(e)}
+              onSerieChange={
+                /* istanbul ignore next */ e => setSerieSelected(e)
+              }
             />
           </HStack>
         </Flex>
@@ -73,7 +77,7 @@ const Episodes = () => {
                 series,
                 title,
               }: Episode) => (
-                <Tr key={episode_id}>
+                <Tr key={episode_id} data-testid="episode-item">
                   <Td isNumeric>{episode}</Td>
                   <Td>{title}</Td>
                   <Td isNumeric>{season}</Td>

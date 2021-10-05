@@ -1,7 +1,7 @@
 import { cloneElement, ReactElement } from 'react';
 
-import { useRouter } from 'next/dist/client/router';
 import Link, { LinkProps } from 'next/link';
+import { useRouter } from 'next/router';
 
 interface ActiveLinkProps extends LinkProps {
   children: ReactElement;
@@ -22,7 +22,8 @@ export function ActiveLink({
 
   if (
     !shouldMatchExactHref &&
-    (asPath.startsWith(String(rest.href)) || asPath.startsWith(String(rest.as)))
+    (asPath.startsWith(String(rest.href)) ||
+      /* istanbul ignore next */ asPath.startsWith(String(rest.as)))
   ) {
     isActive = true;
   }

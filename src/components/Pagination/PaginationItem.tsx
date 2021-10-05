@@ -23,7 +23,7 @@ export function PaginationItem({
           bg: 'pink.500',
           cursor: 'default',
         }}
-        onClick={() => onPageChange(pageNumber)}
+        data-testid="active-pagination-item"
       >
         {pageNumber}
       </Button>
@@ -40,6 +40,7 @@ export function PaginationItem({
         bg: 'gray.500',
       }}
       onClick={() => onPageChange(pageNumber)}
+      data-testid="pagination-item"
     >
       {pageNumber}
     </Button>
