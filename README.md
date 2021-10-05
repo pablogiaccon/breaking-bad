@@ -17,9 +17,9 @@
   <h3 align="center">Breaking Bad</h3>
 
   <p align="center">
-    <a href="https://breaking-bad-challenge.vercel.app/">View Demo</a>
+    <a href="https://breaking-bad-challenge.vercel.app/" target="_blank" rel="noopener noreferrer">View Demo</a>
     ·
-    <a href="https://github.com/pablogiaccon/breaking-bad/issues">Report Bug</a>
+    <a href="https://github.com/pablogiaccon/breaking-bad/issues" >Report Bug</a>
   </p>
 </p>
 
@@ -111,7 +111,8 @@ After installed the node and clone the repository
 
 See the [open issues](https://github.com/pablogiaccon/breaking-bad/issues) for a list of proposed features (and known issues).
 
-You can see the project in production in [breaking-bad](https://breaking-bad-challenge.vercel.app/)
+You can see the project in production in <a href="https://breaking-bad-challenge.vercel.app/" target="_blank" rel="noopener noreferrer">View Demo</a>
+
 
 
 
