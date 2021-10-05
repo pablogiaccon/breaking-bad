@@ -12,8 +12,8 @@ import { CharacterItemSkeleton } from 'organisms/Characters/CharacterItemSkeleto
 import { Filters } from 'organisms/Characters/Filters';
 
 interface HomeProps {
-  name: string;
-  category: string;
+  name?: string;
+  category?: string;
 }
 
 const Home = ({ name, category }: HomeProps) => {
@@ -22,10 +22,12 @@ const Home = ({ name, category }: HomeProps) => {
   const [page, setPage] = useState(1);
   const { data, isLoading } = useCharacters({ limit, name, category, offset });
 
+  /* istanbul ignore next */
   function handleSetCharactersPerPage(quantity: string) {
     setLimit(quantity);
   }
 
+  /* istanbul ignore next */
   const handleSetOffset = useCallback(
     (selectedPage: number) => {
       setPage(selectedPage);
@@ -41,7 +43,7 @@ const Home = ({ name, category }: HomeProps) => {
       <Head>
         <title>Characters - Breaking Bad</title>
       </Head>
-      <Flex direction="column" flex={1}>
+      <Flex direction="column" flex={1} data-testid="characters-list-page">
         <Flex align="center" justify="space-between" mb="6">
           <Title>Characters</Title>
           <Filters
@@ -81,6 +83,7 @@ const Home = ({ name, category }: HomeProps) => {
 
 export default Home;
 
+/* istanbul ignore next */
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   return {
     props: {

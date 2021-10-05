@@ -31,6 +31,7 @@ const RandomDeathPage = ({ death }: DeathProps) => {
 
 export default RandomDeathPage;
 
+/* istanbul ignore next */
 export const getServerSideProps: GetServerSideProps = async () => {
   const death = await getRandomDeath();
 

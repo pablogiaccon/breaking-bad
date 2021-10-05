@@ -21,7 +21,7 @@ export function SeasonsFilter({
       ? seasonsForBreakingBad
       : seasonsForBetterCallSaul;
   return (
-    <Flex align="center" ml="auto">
+    <Flex align="center" ml="auto" data-testid="seasons-filter">
       <Text mr="2" color="gray.400">
         Seasons:
       </Text>

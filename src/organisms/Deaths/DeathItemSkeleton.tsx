@@ -22,6 +22,7 @@ export function DeathItemSkeleton() {
       position="relative"
       boxShadow="xl"
       maxW="320px"
+      data-testid="skeleton-death-item"
     >
       <Tag
         fontSize="12px"

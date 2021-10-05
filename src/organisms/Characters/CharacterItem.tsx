@@ -27,6 +27,7 @@ export function CharacterItem({ character }: CharacterItemProps) {
       position="relative"
       boxShadow="xl"
       maxW="320px"
+      data-testid="character-item"
     >
       <Link href={`/character/${char_id}`} passHref>
         <ChakraLink w="100%">

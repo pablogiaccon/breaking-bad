@@ -14,7 +14,7 @@ const DeathsPage = () => {
       <Head>
         <title>Deaths - Breaking Bad</title>
       </Head>
-      <Flex direction="column" flex={1}>
+      <Flex direction="column" flex={1} data-testid="deaths-page">
         <Flex align="center" justify="space-between" mb="6">
           <Title>Deaths</Title>
         </Flex>

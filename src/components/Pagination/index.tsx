@@ -45,7 +45,7 @@ export function Pagination({
           currentPage,
           Math.min(currentPage + siblingsCount, lastPage),
         )
-      : [];
+      : /* istanbul ignore next */ [];
   }, [currentPage, lastPage]);
 
   const visualizationPagesStart = useMemo(() => {
@@ -64,6 +64,7 @@ export function Pagination({
       mt="8"
       justify="space-between"
       align="center"
+      data-testid="pagination"
     >
       <Box>
         <strong>{visualizationPagesStart}</strong> -{' '}

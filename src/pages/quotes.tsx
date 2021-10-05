@@ -18,12 +18,12 @@ const QuotePage = () => {
       <Head>
         <title>Quotes - Breaking Bad</title>
       </Head>
-      <Flex direction="column" flex={1}>
+      <Flex direction="column" flex={1} data-testid="quotes-page">
         <Flex mb="6" align="center" justify="space-between">
           <Title>Quotes</Title>
           <SerieFilter
             serie={serieSelected}
-            onSerieChange={e => setSerieSelected(e)}
+            onSerieChange={/* istanbul ignore next */ e => setSerieSelected(e)}
           />
         </Flex>
 

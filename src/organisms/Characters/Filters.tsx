@@ -19,6 +19,7 @@ export function Filters({ handleSetCharactersPerPage, limit }: FiltersProps) {
         width="max-content"
         onChange={e => handleSetCharactersPerPage(e.target.value)}
         value={limit}
+        data-testid="select-filters"
       >
         <option
           value="10"

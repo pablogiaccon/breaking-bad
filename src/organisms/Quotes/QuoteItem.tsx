@@ -20,6 +20,7 @@ export function QuoteItem({ quote }: QuoteItemProps) {
       position="relative"
       boxShadow="xl"
       maxW="320px"
+      data-testid="quote-item"
     >
       <Text fontSize="lg" fontWeight="bold">
         {author}

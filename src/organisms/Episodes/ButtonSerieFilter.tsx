@@ -22,7 +22,7 @@ export function ButtonSerieFilter({
           bg: 'pink.500',
           cursor: 'default',
         }}
-        onClick={() => onSerieChange(serie)}
+        data-testid="active-button-serie-filter"
       >
         {serie}
       </Button>
@@ -38,6 +38,7 @@ export function ButtonSerieFilter({
         bg: 'gray.500',
       }}
       onClick={() => onSerieChange(serie)}
+      data-testid="button-serie-filter"
     >
       {serie}
     </Button>
